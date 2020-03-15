@@ -30,6 +30,8 @@ module.exports = {
     "no-console": 0,
     "no-param-reassign": 0,
     "no-shadow": 0,
+    "import/extensions": 0,
+    "import/no-unresolved": 0,
     "no-restricted-syntax": 0,
     "func-names": 0,
     "no-underscore-dangle": 0,
