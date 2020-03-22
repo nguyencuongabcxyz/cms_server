@@ -11,7 +11,8 @@ export class DbConnector {
       mongoose.connect(this._connectionString)
         .then(() => {
           console.log('Connected to Database!!!');
-        }).catch(() => {
+        }).catch((e) => {
+          console.log(e);
           console.log('Connection failed!');
         });
     }

@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import ResponsedError from '../models/responsedError';
 
-export default function ExceptionHandler(
+export default function ExceptionMiddleware(
   error: ResponsedError,
   req:Request,
   res: Response,
