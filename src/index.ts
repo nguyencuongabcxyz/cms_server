@@ -1,8 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import UserRoute from './routes/user-routes';
-import TaskRoute from './routes/task-routes';
-import AuthRoute from './routes/auth-routes';
+import UserRoute from './routes/user-route';
+import TaskRoute from './routes/task-route';
+import AuthRoute from './routes/auth-route';
 import ExceptionMiddleware from './middlewares/exception-middleware';
 import { DbConnector } from './dbConnector';
 
