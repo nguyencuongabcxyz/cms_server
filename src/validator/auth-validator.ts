@@ -1,11 +1,11 @@
-import { Request, Response, NextFunction } from 'express';
-import { check, body, validationResult } from 'express-validator';
-import ResponsedError from '../models/responsedError';
+import { check } from 'express-validator';
 import ValidatorMiddleware from '../middlewares/validator-middleware';
 
 const signUp = [
-  check('email').isEmail().exists().notEmpty(),
-  check('password').exists().notEmpty().isLength({ min: 4 }),
+  check('email', 'Email is required!').exists().bail().notEmpty(),
+  check('email', 'Email is invalid!').isEmail(),
+  check('password', "Password is required!'").exists().bail().notEmpty(),
+  check('password', 'Password must have at least 4 characters').isLength({ min: 4 }),
   ValidatorMiddleware,
 ];
 

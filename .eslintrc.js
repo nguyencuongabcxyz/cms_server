@@ -34,6 +34,7 @@ module.exports = {
     "import/no-unresolved": 0,
     "no-restricted-syntax": 0,
     "func-names": 0,
+    "semi": 0,
     "no-underscore-dangle": 0,
     "no-unused-vars": 0,
     "global-require": 0,

@@ -1,9 +1,14 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Schema, Document } from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
 
 export interface IAccount {
     email: string,
     password: string,
+}
+
+interface IAccountModel extends Document {
+  email: string,
+  password: string,
 }
 
 const accountSchema: Schema = new Schema({
@@ -13,6 +18,6 @@ const accountSchema: Schema = new Schema({
 
 accountSchema.plugin(uniqueValidator);
 
-const Account = mongoose.model('Account', accountSchema);
+const Account = mongoose.model<IAccountModel>('Account', accountSchema);
 
 export default Account;

@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import ResponsedError from '../models/responsedError';
+import IError from '../models/error';
 
 export default function ExceptionMiddleware(
   error: ResponsedError,
@@ -11,5 +12,13 @@ export default function ExceptionMiddleware(
     return next(error);
   }
   res.status(error.statusCode || 500);
-  res.json({ message: error.message || 'An unknown error occurred!' });
+  const responsedError: IError = error.message
+    ? {
+      resonse: 'Error occurred at server!',
+      errorMessages: [error.message],
+    } : {
+      resonse: 'Error occurred at server!',
+      errorMessages: ['An unknown error occurred!'],
+    };
+  res.json({ errors: responsedError });
 }
