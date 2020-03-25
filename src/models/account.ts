@@ -14,7 +14,7 @@ interface IAccountModel extends Document {
 const accountSchema: Schema = new Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true, minlength: 4 },
-});
+}, { timestamps: true });
 
 accountSchema.plugin(uniqueValidator);
 

@@ -1,10 +1,11 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { validationResult } from 'express-validator';
 import Account from '../models/account';
 import IError from '../models/error';
 import BcryptUtil from '../utils/bcrypt-util';
+import ResponsedError from '../models/responsedError';
 
-const signUp = async (req: Request, res: Response) => {
+const signUp = async (req: Request, res: Response, next: NextFunction) => {
   const existingAccount = await Account.findOne({ email: req.body.email });
   if (existingAccount) {
     const responsedError: IError = {
@@ -13,13 +14,17 @@ const signUp = async (req: Request, res: Response) => {
     }
     res.status(400).send({ errors: responsedError });
   }
-  const hashPassword = await BcryptUtil.hashPassword(req.body.password);
-  const newAccount = new Account({
-    email: req.body.email,
-    password: hashPassword,
-  })
-  const createdAccount = await newAccount.save();
-  res.send({ account: createdAccount });
+  try {
+    const hashPassword = await BcryptUtil.hashPassword(req.body.password);
+    const newAccount = new Account({
+      email: req.body.email,
+      password: hashPassword,
+    })
+    const createdAccount = await newAccount.save();
+    res.send({ account: createdAccount });
+  } catch (error) {
+    next(new ResponsedError(error.message, 500));
+  }
 };
 
 const signIn = () => {
